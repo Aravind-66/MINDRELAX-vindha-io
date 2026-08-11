@@ -7,6 +7,15 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   selenium-tests:
     name: "Selenium - Website Tests (300)"
@@ -168,6 +177,18 @@ jobs:
             test-reports/Master_MindRelax_Test_Report_1500.json
             test-reports/Master_MindRelax_Test_Report_1500.xlsx
             test-reports/Master_MindRelax_Test_Report_1500.csv
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   publish-precare-artifacts:
     name: "Publish PreCare Excel & JSON Data Artifacts"
