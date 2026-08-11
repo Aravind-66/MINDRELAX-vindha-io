@@ -26,6 +26,10 @@ import { useWellness } from './context/WellnessContext';
 function AppLayout() {
   const { bgTheme, colorMode } = useWellness();
 
+  React.useEffect(() => {
+    document.title = 'MindRelax - Mental Wellness & Relaxation Sanctuary';
+  }, []);
+
   return (
     <div data-theme={bgTheme} data-color-mode={colorMode} className="min-h-screen bg-transparent font-sans selection:bg-emerald-500 selection:text-white flex flex-col lg:flex-row relative">
       {/* Live 3D Particle Wave Animated Background */}
