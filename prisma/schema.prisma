@@ -1,0 +1,66 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             String         @id @default(uuid())
+  email          String?        @unique
+  displayName    String         @map("display_name")
+  ageRange       String?        @map("age_range")
+  wellnessPoints Int            @default(0) @map("wellness_points")
+  streak         Int            @default(0)
+  plantLevel     Int            @default(1) @map("plant_level")
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  journalEntries JournalEntry[]
+  moodEntries    MoodEntry[]
+  analytics      Analytics[]
+
+  @@map("users")
+}
+
+model JournalEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  content   String
+  mood      String?
+  tags      String[] @default([])
+  prompt    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("journal_entries")
+}
+
+model MoodEntry {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mood      String
+  intensity Int      @default(3)
+  note      String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("mood_entries")
+}
+
+model Analytics {
+  id            String   @id @default(uuid())
+  userId        String   @map("user_id")
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalSessions Int      @default(0) @map("total_sessions")
+  totalMinutes  Int      @default(0) @map("total_minutes")
+  streakDays    Int      @default(0) @map("streak_days")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("analytics")
+}

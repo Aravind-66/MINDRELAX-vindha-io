@@ -1,0 +1,256 @@
+{
+  "profiles": [
+    {
+      "id": "anon_1786462396138_bjhxrt",
+      "display_name": "aaa",
+      "age_range": "",
+      "current_mood": "Happy",
+      "wellness_goals": [],
+      "preferred_activities": [],
+      "created_at": "2026-08-11T15:33:17.485Z",
+      "updated_at": "2026-08-11T15:36:11.751Z",
+      "streak": 1,
+      "wellness_points": 65,
+      "plant_level": 1,
+      "plant_xp": 20
+    },
+    {
+      "id": "anon_1786464902552_555iy6",
+      "display_name": "shalz",
+      "age_range": "",
+      "current_mood": "Neutral",
+      "wellness_goals": [],
+      "preferred_activities": [],
+      "created_at": "2026-08-11T16:15:02.552Z",
+      "updated_at": "2026-08-11T16:32:13.521Z",
+      "streak": 1,
+      "wellness_points": 80,
+      "plant_level": 1,
+      "plant_xp": 35
+    },
+    {
+      "id": "anon_1786467639860_9mlsb4",
+      "display_name": "fghj",
+      "age_range": "",
+      "current_mood": "Neutral",
+      "wellness_goals": [],
+      "preferred_activities": [],
+      "created_at": "2026-08-11T17:03:04.531Z",
+      "updated_at": "2026-08-11T17:03:04.531Z",
+      "streak": 1,
+      "wellness_points": 50,
+      "plant_level": 1,
+      "plant_xp": 0
+    }
+  ],
+  "mood_entries": [
+    {
+      "id": "mood_1786462570769_hyrnj",
+      "profile_id": "anon_1786462396138_bjhxrt",
+      "mood": "Happy",
+      "intensity": 3,
+      "note": "",
+      "created_at": "2026-08-11T15:36:10.769Z"
+    }
+  ],
+  "journal_entries": [
+    {
+      "id": "jour_1786465933505_nqtrm",
+      "profile_id": "anon_1786464902552_555iy6",
+      "title": "DAY 01",
+      "content": "FELT GOOD\n",
+      "mood": "Happy",
+      "tags": [],
+      "prompt": "Describe a quiet moment today when you felt calm.",
+      "created_at": "2026-08-11T16:32:13.505Z",
+      "updated_at": "2026-08-11T16:32:13.505Z"
+    }
+  ],
+  "meditation_sessions": [],
+  "community_posts": [
+    {
+      "id": "post_1",
+      "author_id": "user_serene_mind",
+      "author_name": "Serene Traveler",
+      "category": "Motivation",
+      "content": "Just completed a 10-minute box breathing exercise after a hectic workday. My heart rate slowed down and I feel grounded. Remember: it is okay to pause!",
+      "likes_count": 12,
+      "created_at": "2026-08-11T11:12:57.173Z"
+    },
+    {
+      "id": "post_2",
+      "author_id": "user_peaceful_breeze",
+      "author_name": "Quiet Oak",
+      "category": "Sleep",
+      "content": "The rain soundscape in MindRelax combined with 5 minutes of journaling helped me sleep through the night for the first time this month! Grateful for this community.",
+      "likes_count": 19,
+      "created_at": "2026-08-11T03:12:57.173Z"
+    },
+    {
+      "id": "post_3",
+      "author_id": "user_mindful_joy",
+      "author_name": "Aria Hope",
+      "category": "Personal Growth",
+      "content": "My virtual plant just reached Sprout stage! It’s a wonderful reminder that small daily wellness check-ins nurture real growth over time 🌱",
+      "likes_count": 24,
+      "created_at": "2026-08-10T15:12:57.173Z"
+    }
+  ],
+  "community_comments": [
+    {
+      "id": "comm_1",
+      "post_id": "post_1",
+      "author_id": "user_peaceful_breeze",
+      "author_name": "Quiet Oak",
+      "content": "So happy for you! Box breathing is my favorite go-to whenever anxiety creeps in.",
+      "created_at": "2026-08-11T13:12:57.173Z"
+    }
+  ],
+  "post_likes": [],
+  "friendships": [],
+  "goals": [],
+  "achievements": [
+    {
+      "id": "ach_1",
+      "key": "first_step",
+      "title": "First Step",
+      "description": "Complete your first wellness activity.",
+      "icon": "footprints",
+      "points_reward": 50
+    },
+    {
+      "id": "ach_2",
+      "key": "streak_3",
+      "title": "3 Day Streak",
+      "description": "Use MindRelax for 3 consecutive days.",
+      "icon": "flame",
+      "points_reward": 100
+    },
+    {
+      "id": "ach_3",
+      "key": "streak_7",
+      "title": "Mindful Week",
+      "description": "Complete wellness activities for 7 days.",
+      "icon": "zap",
+      "points_reward": 200
+    },
+    {
+      "id": "ach_4",
+      "key": "journal_10",
+      "title": "Journal Explorer",
+      "description": "Create 10 journal entries.",
+      "icon": "book-open",
+      "points_reward": 150
+    },
+    {
+      "id": "ach_5",
+      "key": "meditation_10",
+      "title": "Calm Mind",
+      "description": "Complete 10 meditation sessions.",
+      "icon": "sparkles",
+      "points_reward": 150
+    },
+    {
+      "id": "ach_6",
+      "key": "plant_3",
+      "title": "Green Thumb",
+      "description": "Grow your virtual plant to level 3.",
+      "icon": "sprout",
+      "points_reward": 250
+    }
+  ],
+  "user_achievements": [],
+  "game_sessions": [],
+  "plant_progress": [],
+  "resources": [
+    {
+      "id": "res_1",
+      "title": "Understanding Anxiety & Practical Grounding Techniques",
+      "description": "Learn how anxiety affects your nervous system and simple 5-4-3-2-1 exercises to return to the present moment.",
+      "category": "Anxiety awareness",
+      "reading_time_mins": 5,
+      "content": "Anxiety is a natural response from our fight-or-flight nervous system. When stress accumulates, our body signals danger even when we are safe.\n\n### The 5-4-3-2-1 Grounding Method\n1. **Acknowledge 5 things you can see** around you (a clock, a leaf, a window).\n2. **Acknowledge 4 things you can touch** (your coat, your skin, the desk).\n3. **Acknowledge 3 things you hear** (traffic outside, breeze, humming computer).\n4. **Acknowledge 2 things you smell** (coffee, fresh air).\n5. **Acknowledge 1 thing you taste** (mint, water).\n\nPracticing this daily recalibrates your amygdala and helps soothe sudden nervous tension.",
+      "created_at": "2026-08-11T15:12:57.171Z"
+    },
+    {
+      "id": "res_2",
+      "title": "The Science of Deep Sleep & Nighttime Routines",
+      "description": "Discover how light, temperature, and mental offloading dramatically improve your REM sleep quality.",
+      "category": "Sleep",
+      "reading_time_mins": 6,
+      "content": "Quality sleep is the cornerstone of emotional resilience. Restless nights often stem from an overactive mind attempting to process unresolved daily thoughts.\n\n### Essential Nightly Rituals:\n- **Brain Dump Journaling:** Spend 3 minutes writing down tomorrow's tasks or lingering worries to release cognitive load.\n- **Dim Blue Light:** Turn off screen backlight 45 minutes before sleep.\n- **Cool Room Temperature:** Keep ambient temperature around 65–68°F (18–20°C) to facilitate your body's melatonin synthesis.",
+      "created_at": "2026-08-11T15:12:57.173Z"
+    },
+    {
+      "id": "res_3",
+      "title": "Mindfulness in Daily Life: Beyond the Cushion",
+      "description": "How to bring gentle awareness into washing dishes, drinking tea, and walking.",
+      "category": "Mindfulness",
+      "reading_time_mins": 4,
+      "content": "Mindfulness does not require sitting silently for hours on a cushion. True mindfulness is simply paying open, non-judgmental attention to whatever you are doing right now.\n\nTry taking your next cup of water or tea with 100% presence—notice the warmth of the mug, the aroma, and the physical sensation of drinking. Every mundane moment can become a sanctuary of peace.",
+      "created_at": "2026-08-11T15:12:57.173Z"
+    },
+    {
+      "id": "res_4",
+      "title": "Managing Burnout & Setting Healthy Emotional Boundaries",
+      "description": "Recognize the early signs of emotional exhaustion and protect your mental energy.",
+      "category": "Stress management",
+      "reading_time_mins": 7,
+      "content": "Burnout occurs when long-term demands exceed our physical and emotional recovery capacity. Saying \"no\" to non-essential commitments is an act of self-care.\n\nLearn to recognize warning signs like persistent fatigue, cynicism, or difficulty concentrating, and schedule non-negotiable rest periods every day.",
+      "created_at": "2026-08-11T15:12:57.173Z"
+    }
+  ],
+  "resource_progress": [],
+  "webinars": [
+    {
+      "id": "web_1",
+      "title": "Navigating Work Stress & Finding Inner Calm",
+      "description": "Join clinical psychologist Dr. Elena Vance as she shares evidence-based cognitive strategies for managing workplace anxiety.",
+      "speaker": "Dr. Elena Vance",
+      "speaker_title": "Clinical Psychologist & Mindfulness Researcher",
+      "date": "2026-08-20T18:00:00.000Z",
+      "duration_mins": 45,
+      "status": "upcoming",
+      "video_url": "https://www.youtube.com/embed/inpok4MKVLM"
+    },
+    {
+      "id": "web_2",
+      "title": "Sleep Architecture: Harnessing Rest for Mental Vitality",
+      "description": "Learn neuroscientific insights into sleep hygiene, circadian rhythm optimization, and nighttime meditation practices.",
+      "speaker": "Prof. Marcus Thorne",
+      "speaker_title": "Sleep Specialist & Neuroscientist",
+      "date": "2026-08-15T19:00:00.000Z",
+      "duration_mins": 60,
+      "status": "upcoming",
+      "video_url": "https://www.youtube.com/embed/1ZYbU87A96U"
+    },
+    {
+      "id": "web_3",
+      "title": "Masterclass: Art of Breathwork & Nervous System Regulation",
+      "description": "Guided session exploring box breathing, diaphragmatic expansion, and vagus nerve stimulation for immediate calmness.",
+      "speaker": "Sarah Jenkins, M.S.",
+      "speaker_title": "Certified Breathwork Facilitator",
+      "date": "2026-08-01T15:00:00.000Z",
+      "duration_mins": 35,
+      "status": "recorded",
+      "video_url": "https://www.youtube.com/embed/aNXKjGFUlMs"
+    }
+  ],
+  "notifications": [],
+  "chat_messages": [
+    {
+      "id": "chat_1786469254510_ucrt",
+      "profile_id": "anon_1786467639860_9mlsb4",
+      "sender": "user",
+      "text": "I am feeling stressed today",
+      "created_at": "2026-08-11T17:27:34.510Z"
+    },
+    {
+      "id": "chat_1786469254521_huj9",
+      "profile_id": "anon_1786467639860_9mlsb4",
+      "sender": "minda",
+      "text": "Minda is temporarily resting. You can still explore meditation, journaling, and relaxation tools!",
+      "created_at": "2026-08-11T17:27:34.521Z"
+    }
+  ]
+}

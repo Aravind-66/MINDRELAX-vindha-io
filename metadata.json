@@ -1,0 +1,6 @@
+{
+  "name": "MindRelax",
+  "description": "A calmer mind starts with one small step. Complete mental wellness platform with mood tracking, journaling, meditation, community, AI assistant Minda, virtual plant, and gamification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
