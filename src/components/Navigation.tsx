@@ -332,13 +332,13 @@ export const Navigation: React.FC = () => {
       {/* FLOATING ASK MINDA BUTTON FOR ALL SCREENS */}
       <button
         onClick={triggerMindaModal}
-        className="fixed bottom-20 lg:bottom-8 right-4 sm:right-6 z-40 group flex items-center gap-2.5 bg-white/95 hover:bg-white text-slate-900 px-4 py-2.5 rounded-full shadow-lg transition hover:scale-[1.03] active:scale-95 border border-slate-300"
+        className="fixed bottom-20 lg:bottom-8 right-4 sm:right-6 z-40 group flex items-center gap-2.5 theme-gradient-btn text-white px-4 py-2.5 rounded-full shadow-lg transition hover:scale-[1.03] active:scale-95 border border-emerald-400/40"
         aria-label="Ask Minda AI"
       >
-        <div className="p-1 rounded-full bg-emerald-50 theme-text-accent border border-emerald-200">
-          <Bot className="w-4 h-4 text-emerald-600" />
+        <div className="p-1 rounded-full bg-white/20 text-white shrink-0">
+          <Bot className="w-4 h-4 text-white" />
         </div>
-        <span className="font-bold text-xs sm:text-sm tracking-tight pr-1 text-slate-800">Ask Minda</span>
+        <span className="font-bold text-xs sm:text-sm tracking-tight pr-1 text-white">Ask Minda</span>
       </button>
     </>
   );

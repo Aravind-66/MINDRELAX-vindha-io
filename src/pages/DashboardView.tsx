@@ -18,7 +18,12 @@ import {
   CheckCircle2,
   Music,
   BarChart2,
-  Compass
+  Compass,
+  Users,
+  Target,
+  FileText,
+  Video,
+  User
 } from 'lucide-react';
 
 export const DashboardView: React.FC = () => {
@@ -53,231 +58,101 @@ export const DashboardView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-300 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
-      {/* Real-time Ticker */}
-      <LiveActivityTicker />
-
-      {/* Hero Section with Interactive 3D Canvas */}
+    <div className="space-y-8 animate-in fade-in duration-300 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full min-w-0">
       <ThreeDCard depth={8} glowColor="var(--color-glow)">
-        <div className="theme-hero-card rounded-3xl p-6 sm:p-8 text-slate-900 shadow-md relative overflow-hidden border grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-          <div className="md:col-span-2 space-y-4 z-10">
+        <div className="theme-hero-card rounded-3xl p-6 sm:p-8 text-slate-900 shadow-md relative overflow-hidden border grid gap-6 lg:grid-cols-[1.3fr_0.9fr] items-center">
+          <div className="space-y-5 z-10">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-300/50 text-slate-800 text-xs font-bold backdrop-blur-md">
               <Compass className="w-3.5 h-3.5 theme-text-accent" />
-              <span>MindRelax Sanctuary</span>
+              <span>MindRelax Home</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
               {greeting}, {profile?.display_name || 'Friend'}
             </h1>
 
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
-              Welcome to your daily peaceful space. Take a slow breath and step into mindful presence.
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium max-w-2xl">
+              Welcome to your personal wellness sanctuary. Pick one of the pages below to continue your mindful journey.
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-3">
-              <button
-                onClick={triggerMindaModal}
-                className="theme-gradient-btn flex items-center gap-2 px-5 py-2.5 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-md transition scale-100 hover:scale-105 active:scale-95"
+            <div className="grid gap-3 sm:grid-cols-2 sm:max-w-full">
+              <NavLink
+                to="/mood"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl theme-gradient-btn text-white font-semibold shadow-sm transition hover:shadow-lg"
               >
-                <Bot className="w-4 h-4 text-white" />
-                <span>Ask Minda AI</span>
-              </button>
+                <Smile className="w-4 h-4" />
+                Mood Tracker
+              </NavLink>
+              <NavLink
+                to="/journal"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl glass-card border border-slate-300/40 text-slate-900 font-semibold transition hover:bg-slate-50"
+              >
+                <BookOpen className="w-4 h-4 theme-text-accent" />
+                Journal
+              </NavLink>
               <NavLink
                 to="/meditate"
-                className="flex items-center gap-2 px-5 py-2.5 glass-card border border-slate-300/40 font-bold rounded-2xl text-xs sm:text-sm transition hover:scale-105 active:scale-95"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl glass-card border border-slate-300/40 text-slate-900 font-semibold transition hover:bg-slate-50"
               >
                 <Compass className="w-4 h-4 theme-text-accent" />
-                <span>Start Relaxation</span>
+                Meditate
+              </NavLink>
+              <NavLink
+                to="/music"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-2xl glass-card border border-slate-300/40 text-slate-900 font-semibold transition hover:bg-slate-50"
+              >
+                <Music className="w-4 h-4 text-cyan-400" />
+                Music
               </NavLink>
             </div>
           </div>
 
-          {/* 3D Ambient Hero Ring */}
-          <div className="h-48 md:h-56 w-full relative flex items-center justify-center">
+          <div className="h-72 w-full rounded-3xl overflow-hidden bg-slate-950/60 border border-slate-200/10">
             <ThreeZenCanvas variant="hero" className="w-full h-full" />
           </div>
         </div>
       </ThreeDCard>
 
-      {/* Wellness Overview Metrics Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        {/* Mood Card */}
-        <div className="glass-card p-5 rounded-3xl space-y-2 hover:border-slate-300 transition transform hover:-translate-y-1">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Current Mood</span>
-            <Smile className="w-5 h-5 theme-text-accent" />
+      <section className="space-y-4">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-white">Explore the rest of the app</h2>
+            <p className="text-slate-400 text-sm">Every page is separate so you can move forward one step at a time.</p>
           </div>
-          <p className="text-lg font-bold text-slate-900 truncate">{todayMood}</p>
-          <NavLink to="/mood" className="text-[11px] font-bold theme-text-accent hover:underline inline-flex items-center gap-1">
-            <span>Check In</span>
-            <ArrowRight className="w-3 h-3" />
-          </NavLink>
         </div>
 
-        {/* Streak Card */}
-        <div className="glass-card p-5 rounded-3xl space-y-2 hover:border-slate-300 transition transform hover:-translate-y-1">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Streak</span>
-            <Flame className="w-5 h-5 text-amber-500 fill-amber-500" />
-          </div>
-          <p className="text-lg font-bold text-slate-900">{profile?.streak || 1} Days</p>
-          <span className="text-[11px] text-slate-500 block font-semibold">Active daily check-ins</span>
-        </div>
-
-        {/* Points Card */}
-        <div className="glass-card p-5 rounded-3xl space-y-2 hover:border-slate-300 transition transform hover:-translate-y-1">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Wellness Points</span>
-            <Award className="w-5 h-5 text-purple-600" />
-          </div>
-          <p className="text-lg font-bold text-slate-900">{profile?.wellness_points || 0}</p>
-          <span className="text-[11px] theme-text-accent font-bold block">Level {profile?.plant_level || 1} Plant</span>
-        </div>
-
-        {/* Meditation Minutes */}
-        <div className="glass-card p-5 rounded-3xl space-y-2 hover:border-slate-300 transition transform hover:-translate-y-1">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Meditation</span>
-            <Clock className="w-5 h-5 theme-text-accent" />
-          </div>
-          <p className="text-lg font-bold text-slate-900">{totalMeditationMins} mins</p>
-          <span className="text-[11px] text-slate-500 block font-semibold">Total session time</span>
-        </div>
-
-        {/* Journal Entries */}
-        <div className="col-span-2 sm:col-span-1 glass-card p-5 rounded-3xl space-y-2 hover:border-slate-300 transition transform hover:-translate-y-1">
-          <div className="flex items-center justify-between text-slate-500">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">Journal</span>
-            <BookOpen className="w-5 h-5 text-indigo-600" />
-          </div>
-          <p className="text-lg font-bold text-slate-900">{totalJournals} entries</p>
-          <NavLink to="/journal" className="text-[11px] font-bold theme-text-accent hover:underline inline-flex items-center gap-1">
-            <span>Write Entry</span>
-            <ArrowRight className="w-3 h-3" />
-          </NavLink>
-        </div>
-      </div>
-
-      {/* Daily Insight Box */}
-      <div className="glass-card p-6 rounded-3xl flex items-start gap-4 shadow-sm border theme-border-accent bg-emerald-50/40">
-        <div className="p-3 bg-emerald-500/10 theme-text-accent rounded-2xl border theme-border-accent shrink-0">
-          <TrendingUp className="w-6 h-6" />
-        </div>
-        <div className="space-y-1">
-          <h3 className="font-bold text-white text-base">Daily Mindful Insight</h3>
-          <p className="text-slate-200 text-sm leading-relaxed">{getDailyInsight()}</p>
-        </div>
-      </div>
-
-      {/* Quick Actions Grid */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-bold text-white tracking-tight">Quick Actions</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <NavLink
-            to="/mood"
-            className="flex flex-col items-center justify-center p-4 glass-card rounded-2xl border border-white/10 shadow-xs hover:border-emerald-500 transition group"
-          >
-            <div className="p-3 rounded-2xl bg-white/5 theme-text-accent group-hover:scale-110 transition mb-2">
-              <Smile className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-bold text-slate-200">Mood Tracker</span>
-          </NavLink>
-
-          <NavLink
-            to="/journal"
-            className="flex flex-col items-center justify-center p-4 glass-card rounded-2xl border border-white/10 shadow-xs hover:border-indigo-500 transition group"
-          >
-            <div className="p-3 rounded-2xl bg-white/5 text-indigo-400 group-hover:scale-110 transition mb-2">
-              <BookOpen className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-bold text-slate-200">Journal</span>
-          </NavLink>
-
-          <NavLink
-            to="/meditate"
-            className="flex flex-col items-center justify-center p-4 glass-card rounded-2xl border border-white/10 shadow-xs hover:border-teal-500 transition group"
-          >
-            <div className="p-3 rounded-2xl bg-white/5 theme-text-accent group-hover:scale-110 transition mb-2">
-              <Compass className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-bold text-slate-200">Relaxation</span>
-          </NavLink>
-
-          <NavLink
-            to="/music"
-            className="flex flex-col items-center justify-center p-4 glass-card rounded-2xl border border-white/10 shadow-xs hover:border-cyan-500 transition group"
-          >
-            <div className="p-3 rounded-2xl bg-white/5 text-cyan-400 group-hover:scale-110 transition mb-2">
-              <Music className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-bold text-slate-200">Music & Sound</span>
-          </NavLink>
-
-          <NavLink
-            to="/analytics"
-            className="flex flex-col items-center justify-center p-4 glass-card rounded-2xl border border-white/10 shadow-xs hover:border-blue-500 transition group"
-          >
-            <div className="p-3 rounded-2xl bg-white/5 text-blue-400 group-hover:scale-110 transition mb-2">
-              <BarChart2 className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-bold text-slate-200">Analytics</span>
-          </NavLink>
-
-          <NavLink
-            to="/games"
-            className="flex flex-col items-center justify-center p-4 glass-card rounded-2xl border border-white/10 shadow-xs hover:border-purple-500 transition group"
-          >
-            <div className="p-3 rounded-2xl bg-white/5 text-purple-400 group-hover:scale-110 transition mb-2">
-              <Gamepad2 className="w-6 h-6" />
-            </div>
-            <span className="text-xs font-bold text-slate-200">Mind Games</span>
-          </NavLink>
-        </div>
-      </div>
-
-      {/* Plant & Goals Quick Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Plant Widget */}
-        <div className="glass-card p-6 rounded-3xl border border-white/10 shadow-md flex items-center gap-6">
-          <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center theme-text-accent shrink-0 shadow-inner">
-            <Sprout className="w-10 h-10" />
-          </div>
-          <div className="space-y-2 flex-1">
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold text-white text-base">Virtual Plant</h3>
-              <span className="text-xs font-bold bg-white/10 theme-text-accent px-2.5 py-0.5 rounded-full border theme-border-accent">
-                Level {profile?.plant_level || 1}
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">Your plant flourishes as you maintain daily mindfulness and self-care logs.</p>
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 w-full min-w-0">
+          {[
+            { title: 'Mood', path: '/mood', icon: Smile, description: 'Log how you feel and build emotional awareness.' },
+            { title: 'Journal', path: '/journal', icon: BookOpen, description: 'Capture thoughts, gratitude, and daily reflections.' },
+            { title: 'Meditate', path: '/meditate', icon: Compass, description: 'Start a calm breathing or relaxation session.' },
+            { title: 'Music', path: '/music', icon: Music, description: 'Play soothing soundscapes and focus tracks.' },
+            { title: 'Community', path: '/community', icon: Users, description: 'Join the sanctuary and connect with others.' },
+            { title: 'Games', path: '/games', icon: Gamepad2, description: 'Try mindful games and brain breaks.' },
+            { title: 'Plant', path: '/plant', icon: Sprout, description: 'Grow your virtual plant with healthy habits.' },
+            { title: 'Goals', path: '/goals', icon: Target, description: 'Track your wellness goals and progress.' },
+            { title: 'Resources', path: '/resources', icon: FileText, description: 'Browse guided resources and tools.' },
+            { title: 'Webinars', path: '/webinars', icon: Video, description: 'Watch wellness talks and live sessions.' },
+            { title: 'Analytics', path: '/analytics', icon: BarChart2, description: 'See your trends and self-care progress.' },
+            { title: 'Profile', path: '/profile', icon: User, description: 'Manage your profile and settings.' }
+          ].map(item => (
             <NavLink
-              to="/plant"
-              className="text-xs font-bold theme-text-accent hover:underline inline-flex items-center gap-1 pt-1"
+              key={item.title}
+              to={item.path}
+              className="glass-card p-5 rounded-3xl border border-white/10 shadow-sm transition hover:-translate-y-1 hover:border-emerald-400/40 min-w-0"
             >
-              <span>Care for Plant</span>
-              <ArrowRight className="w-3 h-3" />
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <div className="w-11 h-11 rounded-2xl bg-slate-900/80 border border-white/10 flex items-center justify-center text-emerald-400 shadow-inner">
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <span className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">Go</span>
+              </div>
+              <h3 className="text-lg font-bold text-white">{item.title}</h3>
+              <p className="text-sm text-slate-400 mt-2">{item.description}</p>
             </NavLink>
-          </div>
+          ))}
         </div>
-
-        {/* Goals Widget */}
-        <div className="glass-card p-6 rounded-3xl border border-white/10 shadow-md flex items-center gap-6">
-          <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-indigo-400 shrink-0 shadow-inner">
-            <CheckCircle2 className="w-10 h-10" />
-          </div>
-          <div className="space-y-2 flex-1">
-            <h3 className="font-bold text-white text-base">Wellness Goals</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">Set daily and weekly intentions to nurture calm habits and emotional clarity.</p>
-            <NavLink
-              to="/goals"
-              className="text-xs font-bold theme-text-accent hover:underline inline-flex items-center gap-1 pt-1"
-            >
-              <span>View Active Goals</span>
-              <ArrowRight className="w-3 h-3" />
-            </NavLink>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };
