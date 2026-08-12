@@ -48,6 +48,7 @@ const WellnessContext = createContext<WellnessContextType | undefined>(undefined
 
 const LOCAL_STORAGE_KEY = 'mindrelax_profile_id';
 const COLOR_MODE_KEY = 'mindrelax_color_mode';
+const BG_THEME_KEY = 'mindrelax_bg_theme';
 
 export const WellnessProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -62,11 +63,19 @@ export const WellnessProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Real-time & Mode states
   const [onlineCount, setOnlineCount] = useState<number>(1);
   const [isRealtimeConnected, setIsRealtimeConnected] = useState<boolean>(false);
-  const [bgTheme, setBgTheme] = useState<'emerald' | 'cosmic' | 'ocean' | 'sunset' | 'zen'>('emerald');
+  const [bgTheme, setBgThemeState] = useState<'emerald' | 'cosmic' | 'ocean' | 'sunset' | 'zen'>(() => {
+    const saved = localStorage.getItem(BG_THEME_KEY);
+    return saved === 'cosmic' || saved === 'ocean' || saved === 'sunset' || saved === 'zen' ? saved : 'emerald';
+  });
   const [colorMode, setColorModeState] = useState<'dark' | 'light'>(() => {
     const saved = localStorage.getItem(COLOR_MODE_KEY);
     return saved === 'light' ? 'light' : 'dark';
   });
+
+  const setBgTheme = (theme: 'emerald' | 'cosmic' | 'ocean' | 'sunset' | 'zen') => {
+    setBgThemeState(theme);
+    localStorage.setItem(BG_THEME_KEY, theme);
+  };
 
   const setColorMode = (mode: 'dark' | 'light') => {
     setColorModeState(mode);

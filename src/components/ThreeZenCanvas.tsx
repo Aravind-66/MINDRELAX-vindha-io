@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { useWellness } from '../context/WellnessContext';
 
 interface ThreeZenCanvasProps {
-  variant?: 'hero' | 'meditation' | 'ambient' | 'plant';
+  variant?: 'hero' | 'meditation' | 'ambient' | 'plant' | 'character';
   className?: string;
 }
 
@@ -56,10 +56,19 @@ export const ThreeZenCanvas: React.FC<ThreeZenCanvasProps> = ({ variant = 'hero'
     pointLight2.position.set(-5, -5, 2);
     scene.add(pointLight2);
 
+    const themeColors = {
+      emerald: { main: 0x10b981, secondary: 0x06b6d4, accent: 0x34d399 },
+      cosmic: { main: 0xa855f7, secondary: 0x6366f1, accent: 0xc084fc },
+      ocean: { main: 0x06b6d4, secondary: 0x3b82f6, accent: 0x38bdf8 },
+      sunset: { main: 0xf43f5e, secondary: 0xf59e0b, accent: 0xfb7185 },
+      zen: { main: 0x84cc16, secondary: 0x10b981, accent: 0xa3e635 }
+    };
+
     // Objects based on variant
     let torusMesh: THREE.Mesh | null = null;
     let sphereMesh: THREE.Mesh | null = null;
     let particlesMesh: THREE.Points | null = null;
+    let characterGroup: THREE.Group | null = null;
     let torusMat: THREE.MeshPhysicalMaterial | null = null;
     let sphereMat: THREE.MeshStandardMaterial | THREE.MeshPhysicalMaterial | null = null;
 
@@ -129,6 +138,44 @@ export const ThreeZenCanvas: React.FC<ThreeZenCanvasProps> = ({ variant = 'hero'
 
       mainGroup.add(stem);
       mainGroup.add(sphereMesh);
+    } else if (variant === 'character') {
+      const skinColor = 0xf3c9a5;
+      const currentTheme = themeRef.current in themeColors ? themeRef.current : 'emerald';
+      const outfitColor = new THREE.Color(themeColors[currentTheme].main);
+      const bodyMat = new THREE.MeshStandardMaterial({ color: outfitColor, roughness: 0.35, metalness: 0.2 });
+      const skinMat = new THREE.MeshStandardMaterial({ color: skinColor, roughness: 0.8, metalness: 0.1 });
+
+      const bodyGeo = new THREE.CapsuleGeometry(0.28, 0.9, 4, 16);
+      const body = new THREE.Mesh(bodyGeo, bodyMat);
+      body.position.y = 0.1;
+
+      const headGeo = new THREE.SphereGeometry(0.3, 32, 32);
+      const head = new THREE.Mesh(headGeo, skinMat);
+      head.position.y = 1.05;
+
+      const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.8, 12), bodyMat);
+      leftArm.position.set(-0.42, 0.35, 0);
+      leftArm.rotation.z = Math.PI / 8;
+
+      const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.8, 12), bodyMat);
+      rightArm.position.set(0.42, 0.35, 0);
+      rightArm.rotation.z = -Math.PI / 8;
+      rightArm.name = 'rightArm';
+
+      const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.9, 12), bodyMat);
+      leftLeg.position.set(-0.15, -0.75, 0);
+      leftLeg.rotation.x = Math.PI / 60;
+
+      const rightLeg = leftLeg.clone();
+      rightLeg.position.set(0.15, -0.75, 0);
+
+      const hairGeo = new THREE.SphereGeometry(0.34, 32, 32, 0, Math.PI * 2, 0, Math.PI / 1.8);
+      const hair = new THREE.Mesh(hairGeo, new THREE.MeshStandardMaterial({ color: 0x2b2b2b, roughness: 0.5 }));
+      hair.position.y = 1.18;
+
+      characterGroup = new THREE.Group();
+      characterGroup.add(body, head, leftArm, rightArm, leftLeg, rightLeg, hair);
+      mainGroup.add(characterGroup);
     }
 
     // Floating Ambient Particles
@@ -149,14 +196,6 @@ export const ThreeZenCanvas: React.FC<ThreeZenCanvasProps> = ({ variant = 'hero'
     });
     particlesMesh = new THREE.Points(particleGeo, particleMat);
     scene.add(particlesMesh);
-
-    const themeColors = {
-      emerald: { main: 0x10b981, secondary: 0x06b6d4, accent: 0x34d399 },
-      cosmic: { main: 0xa855f7, secondary: 0x6366f1, accent: 0xc084fc },
-      ocean: { main: 0x06b6d4, secondary: 0x3b82f6, accent: 0x38bdf8 },
-      sunset: { main: 0xf43f5e, secondary: 0xf59e0b, accent: 0xfb7185 },
-      zen: { main: 0x84cc16, secondary: 0x10b981, accent: 0xa3e635 }
-    };
 
     // Mouse Interaction
     let mouseX = 0;
@@ -209,6 +248,15 @@ export const ThreeZenCanvas: React.FC<ThreeZenCanvasProps> = ({ variant = 'hero'
           sphereMesh.rotation.y = -elapsedTime * 0.4;
           const scale = 1 + Math.sin(elapsedTime * 1.5) * 0.08;
           sphereMesh.scale.set(scale, scale, scale);
+        }
+        if (characterGroup) {
+          characterGroup.rotation.y = elapsedTime * 0.3;
+          const rightArm = characterGroup.getObjectByName('rightArm');
+          if (rightArm) {
+            rightArm.rotation.z = -Math.PI / 8 + Math.sin(elapsedTime * 2) * 0.25;
+          }
+          const bob = Math.sin(elapsedTime * 1.4) * 0.03;
+          characterGroup.position.y = bob;
         }
         if (particlesMesh) {
           particlesMesh.rotation.y = elapsedTime * 0.05;

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useWellness } from '../context/WellnessContext';
 import { api } from '../services/api';
 import { Achievement } from '../types';
-import { Award, Flame, Settings, RotateCcw, Check, ShieldCheck, Sprout } from 'lucide-react';
+import { Award, Flame, Settings, RotateCcw, Check, ShieldCheck, Sprout, Moon, Sun, Palette } from 'lucide-react';
+import { ThreeZenCanvas } from '../components/ThreeZenCanvas';
 
 export const ProfileView: React.FC = () => {
-  const { profile, updateProfileData, setIsOnboardingOpen } = useWellness();
+  const { profile, updateProfileData, setIsOnboardingOpen, bgTheme, setBgTheme, colorMode, toggleColorMode } = useWellness();
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [displayName, setDisplayName] = useState('');
   const [ageRange, setAgeRange] = useState('');
@@ -199,35 +200,88 @@ export const ProfileView: React.FC = () => {
           </div>
         </div>
 
-        {/* Achievements / Badges Showcase */}
-        <div className="glass-card border border-white/10 rounded-3xl p-6 space-y-4 shadow-2xl">
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
-            <Award className="w-5 h-5 theme-text-accent" /> Badges & Milestones
-          </h2>
+        <div className="space-y-6">
+          <div className="glass-card border border-white/10 rounded-3xl p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Palette className="w-5 h-5 theme-text-accent" /> Theme & Appearance
+              </h2>
+              <button
+                type="button"
+                onClick={toggleColorMode}
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-2xl bg-white/10 text-slate-100 text-xs font-bold transition hover:bg-white/20"
+              >
+                {colorMode === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {colorMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              </button>
+            </div>
 
-          <div className="space-y-3">
-            {!Array.isArray(achievements) || achievements.length === 0 ? (
-              <p className="text-slate-400 text-xs text-center py-6">No badges loaded yet.</p>
-            ) : (
-              achievements.map(ach => (
-                <div
-                  key={ach.id}
-                  className={`p-3.5 rounded-2xl border transition flex items-center gap-3 ${
-                    ach.unlocked
-                      ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200'
-                      : 'bg-slate-950 border-slate-800 text-slate-500 opacity-60'
-                  }`}
+            <p className="text-slate-400 text-sm">Choose a theme for your sanctuary and personalize the mood of the app.</p>
+
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { id: 'emerald', label: 'Emerald', color: 'bg-emerald-400/25 border-emerald-400' },
+                { id: 'cosmic', label: 'Cosmic', color: 'bg-violet-500/25 border-violet-500' },
+                { id: 'ocean', label: 'Ocean', color: 'bg-sky-400/25 border-sky-400' },
+                { id: 'sunset', label: 'Sunset', color: 'bg-rose-400/25 border-rose-400' },
+                { id: 'zen', label: 'Zen', color: 'bg-lime-400/25 border-lime-400' }
+              ].map(themeOption => (
+                <button
+                  key={themeOption.id}
+                  type="button"
+                  onClick={() => setBgTheme(themeOption.id as any)}
+                  className={`border rounded-2xl p-3 text-center text-xs font-semibold transition ${themeOption.color} ${bgTheme === themeOption.id ? 'border-2 border-white shadow-lg' : 'border-white/10'}`}
                 >
-                  <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-white">{ach.title}</p>
-                    <p className="text-[10px] text-slate-400">{ach.description}</p>
-                  </div>
-                </div>
-              ))
-            )}
+                  <div className={`mx-auto mb-2 h-10 w-10 rounded-full ${themeOption.color}`} />
+                  {themeOption.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="glass-card border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="p-6 border-b border-white/10">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                <Sprout className="w-5 h-5 theme-text-accent" /> Personal Avatar
+              </h2>
+              <p className="text-slate-400 text-sm mt-1">Animated character that moves with your theme.</p>
+            </div>
+            <div className="h-72 bg-slate-950/60">
+              <ThreeZenCanvas variant="character" className="w-full h-full" />
+            </div>
+          </div>
+
+          <div className="glass-card border border-white/10 rounded-3xl p-6 space-y-4 shadow-2xl">
+            <h2 className="text-lg font-bold text-white flex items-center gap-2">
+              <Award className="w-5 h-5 theme-text-accent" /> Badges & Milestones
+            </h2>
+
+            <div className="space-y-3">
+              {!Array.isArray(achievements) || achievements.length === 0 ? (
+                <p className="text-slate-400 text-xs text-center py-6">No badges loaded yet.</p>
+              ) : (
+                achievements.map((ach) => {
+                  const badgeClasses = ach.unlocked
+                    ? 'bg-emerald-950/40 border-emerald-500/40 text-emerald-200'
+                    : 'bg-slate-950 border-slate-800 text-slate-500 opacity-60';
+
+                  return (
+                    <div
+                      key={ach.id}
+                      className={`p-3.5 rounded-2xl border transition flex items-center gap-3 ${badgeClasses}`}
+                    >
+                      <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400">
+                        <ShieldCheck className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-white">{ach.title}</p>
+                        <p className="text-[10px] text-slate-400">{ach.description}</p>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
         </div>
       </div>
